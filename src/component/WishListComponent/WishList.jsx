@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./Wishlist.css";
+import "./WishList.css";
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
 import FlowerModal from "../FlowerModalComponent/FlowerModal"
 

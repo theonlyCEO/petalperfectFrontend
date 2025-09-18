@@ -129,7 +129,7 @@
   box-shadow: 0 2px 8px #eec5e547;
 }
 
-/* "In Stock" badge, properly floating over image */
+
 .stock-badge {
   position: absolute;
   top: 7px;
@@ -278,7 +278,7 @@
   .wishlist-card {
     min-height: unset;
     padding: 14px 6vw 14px 6vw;
-    min-width: unset;         /* Remove min-width for small screens */
+    min-width: unset;       
   }
   .wishlist-img-wrap {
     width: 90vw;

@@ -3,7 +3,7 @@ name: Deploy to S3
 on:
   push:
     branches:
-      - master
+      - master # or main, change if needed
 
 jobs:
   deploy:
@@ -12,6 +12,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
 
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
@@ -22,4 +28,4 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
-          SOURCE_DIR: "dist" # Change this to your actual build folder
+          SOURCE_DIR: "dist" # must match your build folder (React/Vite uses "dist")

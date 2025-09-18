@@ -1,0 +1,38 @@
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.25);
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.welcome-card {
+  background: #fff;
+  padding: 18px 26px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  text-align: center;
+  min-width: 260px;
+  transform-origin: center;
+  animation: card-pop 260ms ease;
+}
+
+.welcome-emoji {
+  font-size: 40px;
+  margin-bottom: 8px;
+  display: block;
+  animation: emoji-pop 420ms cubic-bezier(.2,.9,.2,1);
+}
+
+@keyframes emoji-pop {
+  0% { transform: scale(.6); opacity: 0 }
+  60% { transform: scale(1.06); opacity: 1 }
+  100% { transform: scale(1) }
+}
+@keyframes card-pop {
+  from { transform: translateY(6px) scale(.98); opacity: 0 }
+  to { transform: translateY(0) scale(1); opacity: 1 }
+}

@@ -1,0 +1,258 @@
+/* Navbar.css */
+
+/* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Navbar Wrapper */
+.navbar {
+  font-family: Arial, sans-serif;
+  border-bottom: 1px solid #eee;
+}
+
+/* Top Section */
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #800040; /* deep magenta */
+}
+
+.logo span {
+  color: #a10061; /* lighter magenta */
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.search-bar input {
+  border: none;
+  padding: 8px 12px;
+  outline: none;
+  width: 250px;
+}
+
+.search-bar button {
+  background: #a10061;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* Icons Section */
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.icons > div {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Dropdown Menus */
+.account-dropdown,
+.cart-dropdown,
+.dropdown-menu,
+.deep-menu,
+.megamenu-content {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+/* Account Dropdown */
+.account-dropdown {
+  top: 30px;
+  right: 0;
+  width: 220px;
+  padding: 10px;
+}
+
+.account-dropdown p {
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.account-dropdown a {
+  display: block;
+  padding: 5px 0;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.account-dropdown button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  background: #a10061;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Cart Dropdown */
+.cart-dropdown {
+  top: 30px;
+  right: 0;
+  width: 260px;
+  padding: 10px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-weight: bold;
+}
+
+.cart-actions button {
+  width: 48%;
+  padding: 8px;
+  margin-top: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-actions button:first-child {
+  background: #ccc;
+}
+
+.cart-actions button:last-child {
+  background: #a10061;
+  color: white;
+}
+
+/* Main Navigation */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  padding: 10px 40px;
+  background: white;
+  position: relative;
+}
+
+.nav-links a,
+.nav-links button {
+  color: #333;
+  font-size: 0.95rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links a:hover,
+.nav-links button:hover {
+  color: #a10061;
+}
+
+/* Simple Dropdown */
+.dropdown-menu {
+  display: none;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+}
+
+.deep-dropdown {
+  position: relative;
+  padding: 8px 12px;
+}
+
+.deep-menu {
+  display: none;
+  top: 0;
+  left: 100%;
+  min-width: 180px;
+}
+
+.deep-dropdown:hover .deep-menu {
+  display: block;
+}
+
+/* Mega Menu */
+.megamenu {
+  position: relative;
+}
+
+.megamenu-content {
+  display: none;
+  top: 100%;
+  left: 0;
+  padding: 20px;
+  background: #fff;
+}
+
+.megamenu:hover .megamenu-content {
+  display: flex;
+  gap: 20px;
+}
+
+.megamenu-content.columns {
+  display: flex;
+}
+
+.megamenu-content.columns div {
+  min-width: 150px;
+}
+
+.megamenu-content h4 {
+  color: #a10061;
+  margin-bottom: 10px;
+}
+
+/* Hover Effects */
+.dropdown-menu a:hover,
+.account-dropdown a:hover,
+.megamenu-content a:hover {
+  color: #a10061;
+}

@@ -1,0 +1,70 @@
+/* Reset */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* Default body style (normal layout for all pages) */
+body {
+  background-image: url(./images/bird-of-paradise-3840x2160-15715.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: block; /* ✅ FIX: remove flex centering */
+}
+
+/* Signup page specific container (keeps it centered) */
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-container {
+  width: 100%;
+  max-width: 800px;
+  color: rosybrown;
+  background: #f4f4f4;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 20px #ccc;
+  font-family: sans-serif;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-form input {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.signup-form input:focus {
+  outline: 2px solid greenyellow;
+}
+
+.signup-form button {
+  background: #0b74de;
+  color: white;
+  padding: 12px;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signup-form button:hover {
+  background: #074da0;
+}

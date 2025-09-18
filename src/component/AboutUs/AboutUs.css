@@ -1,0 +1,343 @@
+body {
+  margin: 0;
+  font-family: 'Georgia', 'Segoe UI', serif;
+  background: #fff7fb;
+}
+
+.about-main-bg {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 0 40px 0;
+}
+
+.about-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  background: linear-gradient(90deg, #ffe0ef 60%, #faf9f6 100%);
+  border-radius: 30px;
+  box-shadow: 0 10px 28px 0 #ecb5ea27;
+  padding: 48px 36px 36px 50px;
+  margin: 42px auto 60px auto;
+  min-height: 310px;
+  flex-wrap: wrap;
+}
+
+.about-hero-text {
+  flex: 2;
+  min-width: 280px;
+}
+.about-hero-text h1 {
+  font-size: 2.6rem;
+  color: #b5838d;
+  margin: 0 0 16px 0;
+  font-family: 'Georgia', serif;
+}
+.about-hero-text h1 span {
+  color: #cc1970;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.about-hero-text p {
+  color: #5e5961;
+  font-size: 1.2rem;
+  margin-bottom: 28px;
+  letter-spacing: 0.03em;
+}
+
+.shop-now-btn-large {
+  background: linear-gradient(90deg, #c33764 0%, #f76ca2 100%);
+  color: #fff;
+  font-size: 1.21rem;
+  font-weight: bold;
+  padding: 15px 40px;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0 6px 30px #ef8da455;
+  text-decoration: none;
+  letter-spacing: .08em;
+  transition: transform 0.18s, box-shadow 0.20s, background 0.25s;
+  display: inline-block;
+}
+.shop-now-btn-large:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #a11e53 30%, #eea7cf 100%);
+  box-shadow: 0 10px 40px #ed31a344;
+}
+
+.about-hero-img {
+  flex: 1.3;
+  min-width: 220px;
+  width: 270px;
+  height: 290px;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 10px 34px #ee72aa28;
+  border: 2px solid #eed4ed;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  margin: 57px 0 77px 0;
+}
+
+.about-image {
+  flex: 1.2;
+  min-width: 290px;
+  max-width: 360px;
+}
+.about-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px #de84bd27;
+  object-fit: cover;
+}
+
+.about-text {
+  flex: 2;
+  min-width: 270px;
+  padding: 25px 10px;
+  background: #fff8f2;
+  border-radius: 14px;
+}
+.about-text h2 {
+  font-size: 2rem;
+  color: #cc1970;
+  margin-bottom: 18px;
+}
+.about-text p {
+  font-size: 1.13rem;
+  line-height: 1.8;
+  color: #67464c;
+  margin-bottom: 17px;
+}
+
+.about-values {
+  display: flex;
+  gap: 35px;
+  margin-top: 21px;
+  font-size: 1.14rem;
+  color: #af498a;
+}
+.about-values div {
+  background: #fff;
+  border-radius: 7px;
+  padding: 7px 18px;
+  box-shadow: 0 3px 9px #efb9e23a;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Flower Benefits */
+.flower-benefits {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 32px;
+}
+.flower-benefits h2 {
+  font-size: 2rem;
+  color: #b5838d;
+  margin-bottom: 36px;
+  letter-spacing: 0.015em;
+}
+
+.flower-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 27px;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.flower-item {
+  background: linear-gradient(120deg, #fff, #fdefef 82%);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px #f6b7d27a;
+  overflow: hidden;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.flower-item:hover {
+  box-shadow: 0 8px 34px #ed67b6a7;
+  transform: translateY(-6px) scale(1.03);
+}
+.flower-item img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+.flower-item p {
+  padding: 13px 12px;
+  font-size: 1.08rem;
+  color: #5a4b3c;
+  margin: 0;
+}
+
+/* Team */
+.our-team {
+  margin: 76px auto 0 auto;
+  max-width: 950px;
+}
+.our-team h2 {
+  color: #b5838d;
+  font-size: 1.8rem;
+  margin-bottom: 37px;
+  text-align: center;
+}
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 36px;
+}
+.team-member {
+  background: #fff;
+  border-radius: 17px;
+  text-align: center;
+  padding: 19px 20px 13px 20px;
+  box-shadow: 0 4px 16px #e19fac28;
+  color: #904e69;
+  width: 175px;
+  min-width: 150px;
+  font-size: 1.1rem;
+  font-family: 'Georgia', serif;
+}
+.team-member img {
+  width: 79px;
+  height: 79px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 13px;
+  border: 2.5px solid #e9b1b8;
+}
+
+.team-member b {
+  color: #c33764;
+  font-size: 1.09em;
+}
+
+@media (max-width: 980px) {
+  .about-hero {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 10px 25px 10px;
+    gap: 32px;
+    min-height: unset;
+  }
+  .about-hero-img {
+    width: 97vw;
+    max-width: 310px;
+    height: 220px;
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+    margin: 37px 0 37px 0;
+  }
+  .about-header h1 {
+    font-size: 2rem;
+  }
+  .about-text h2, .flower-benefits h2, .our-team h2 {
+    font-size: 1.4rem;
+  }
+  .about-text p, .flower-item p {
+    font-size: 1rem;
+  }
+  .team-grid {
+    gap: 18px;
+  }
+}
+/* --- Extra Small Screens (Phones under 500px) --- */
+@media (max-width: 500px) {
+  .about-hero-text h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  .about-hero-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .shop-now-btn-large {
+    display: block;
+    margin: 0 auto;
+    font-size: 1rem;
+    padding: 12px 28px;
+  }
+  .about-hero-img {
+    max-width: 280px;
+    height: 200px;
+  }
+
+  .about-content {
+    gap: 18px;
+    margin: 30px 0 50px 0;
+  }
+  .about-image img {
+    max-width: 90%;
+    margin: 0 auto;
+    display: block;
+  }
+  .about-text {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+  .about-values {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  .flower-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .flower-item img {
+    height: 170px;
+  }
+  .flower-item p {
+    font-size: 0.95rem;
+  }
+
+  .team-grid {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .team-member {
+    width: 85%;
+    max-width: 300px;
+    font-size: 1rem;
+  }
+}
+
+/* --- Larger Screens (Monitors above 1400px) --- */
+@media (min-width: 1400px) {
+  .about-main-bg {
+    max-width: 1400px;
+  }
+  .about-hero {
+    gap: 70px;
+    padding: 60px;
+  }
+  .about-hero-text h1 {
+    font-size: 3rem;
+  }
+  .about-text h2,
+  .flower-benefits h2,
+  .our-team h2 {
+    font-size: 2.2rem;
+  }
+}

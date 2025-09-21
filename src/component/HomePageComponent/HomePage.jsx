@@ -39,34 +39,6 @@ const renderStars = (rating = 4.8) => {
   return <span>{stars}</span>;
 };
 
-const categoriesData = [
-  {
-    name: "Roses",
-    desc: "Timeless classics in vibrant colors, perfect for any occasion.",
-    image: "https://images.unsplash.com/photo-1569569921196-c4b6c7a14267?auto=format&fit=crop&w=600&q=80",
-    icon: "🌹",
-    promo: "20% Off",
-  },
-  {
-    name: "Tulips",
-    desc: "Bright and cheerful spring blooms to uplift any space.",
-    image: "https://images.unsplash.com/photo-1588605575236-5cd1836a5ee3?auto=format&fit=crop&w=600&q=80",
-    icon: "🌷",
-  },
-  {
-    name: "Bouquets",
-    desc: "Handcrafted mixed arrangements for gifting and decor.",
-    image: "https://images.unsplash.com/photo-1519378058457-4ca4e261265f?auto=format&fit=crop&w=600&q=80",
-    icon: "💐",
-    promo: "Bestseller",
-  },
-  {
-    name: "Orchids",
-    desc: "Elegant exotic flowers that add sophistication.",
-    image: "https://images.unsplash.com/photo-1547474214-1261c13c0471?auto=format&fit=crop&w=600&q=80",
-    icon: "🪷",
-  },
-];
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -171,27 +143,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="categories">
-        <h2>Discover Our Flower Categories</h2>
-        <div className="category-grid">
-          {categoriesData.map((cat, index) => (
-            <div
-              key={index}
-              className="category-card"
-              onClick={() => navigate("/category")}
-            >
-              <div className="category-thumb">
-                <img src={cat.image} alt={cat.name} />
-                <span className="cat-overlay-icon">{cat.icon}</span>
-                {cat.promo && <span className="category-promo-ribbon">{cat.promo}</span>}
-              </div>
-              <h3>{cat.name}</h3>
-              <p className="category-desc">{cat.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+    
+    
 
       {/* Section SVG Divider */}
       <svg className="petal-svg-divider" width="100%" height="60" viewBox="0 0 1440 60" preserveAspectRatio="none">

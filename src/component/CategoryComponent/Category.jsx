@@ -9,7 +9,7 @@ import { FaHeartBroken, FaHeart, FaStar, FaStarHalfAlt, FaRegStar, FaEye, FaFilt
 import { FiMenu, FiX, FiChevronRight } from "react-icons/fi";
 
 const ITEMS_PER_PAGE = 12;
-
+const url = import.meta.env.VITE_BACKEND_URL
 const CategoryPage = () => {
   const [modalProduct, setModalProduct] = useState(null);
   const [products, setProducts] = useState([]);
@@ -50,7 +50,7 @@ const CategoryPage = () => {
     let timer;
     const fetchData = async () => {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/products");
+      const res = await fetch(`${url}/products`);
       const data = await res.json();
       setProducts(data);
       setFilteredProducts(data);

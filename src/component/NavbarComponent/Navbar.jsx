@@ -238,7 +238,6 @@ const Navbar = () => {
         <a href="#" onClick={() => { navigate("/"); setMenuOpen(false); }}>Home</a>
         <a href="#" onClick={() => { navigate("/AboutUs"); setMenuOpen(false); }}>About</a>
         <Link to="/Category" onClick={() => setMenuOpen(false)}><a href="#">Category</a></Link>
-        <a href="#" onClick={() => { navigate("/product-details"); setMenuOpen(false); }}>Product Details</a>
         <a href="#" onClick={() => { navigate("/cart"); setMenuOpen(false); }}>Cart</a>
         <a href="#" onClick={handleCheckoutClick}>Checkout</a>
         <a href="#" onClick={() => { navigate("/contactus"); setMenuOpen(false); }}>Contact</a>

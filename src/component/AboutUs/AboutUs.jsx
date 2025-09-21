@@ -10,11 +10,11 @@ const AboutUs = () => {
         <div className="about-hero">
           <div className="about-hero-text">
             <h1>
-              Welcome to <span>Petal&nbsp;Haven</span>!
+              Welcome to <span>Petal&nbsp;Perfect</span>!
             </h1>
             <p>
               Creating beauty, one bloom at a time.<br />
-              Since 2010, we’ve poured our hearts into making moments memorable, petals perfect, and the planet greener.
+             we’ve poured our hearts into making moments memorable, petals perfect, and the planet greener.
             </p>
             <a href="/shop" className="shop-now-btn-large">
               <FaShoppingBasket /> Shop Now
@@ -35,7 +35,7 @@ const AboutUs = () => {
           <div className="about-text">
             <h2>Handcrafted With Love</h2>
             <p>
-              At Petal Haven, every arrangement is a work of art, handcrafted with passion and care. Our talented team of florists brings years of experience and a personal touch to every order—big or small.
+              At Petal Perfect, every arrangement is a work of art, handcrafted with passion and care. Our talented team of florists brings years of experience and a personal touch to every order—big or small.
             </p>
             <p>
               <b>100% Freshness guarantee! </b>We choose each stem for lasting beauty and fragrance.

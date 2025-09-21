@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./CheckOutPage.css";
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
+import { useIp } from "../../context/IpContext"; // Import the useIp hook
 import { useNavigate } from "react-router-dom";
 import Signin from "../SignIn";
 import Signup from "../Signup";
@@ -18,6 +19,7 @@ const ConfettiIcon = () => (
 );
 
 const CheckoutPage = () => {
+  const { ip } = useIp(); // Access the IP from context
   const { cart, clearCart, user } = useContext(ShopContext);
   const navigate = useNavigate();
 
@@ -84,8 +86,9 @@ const CheckoutPage = () => {
       setAuthModal({ open: true, type: "signin" });
       return;
     }
+    
     // Call backend to place order!
-    const res = await fetch('http://localhost:3000/orders', {
+    const res = await fetch(`http://${ip}/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -100,7 +103,7 @@ const CheckoutPage = () => {
       }),
     });
     if (res.ok) {
-      await fetch('http://localhost:3000/cart/clear', {
+      await fetch(`http://${ip}/cart/clear`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: user.email })
@@ -230,7 +233,8 @@ const CheckoutPage = () => {
           </form>
         </div>
       </div>
-    </>  );
+    </>
+  );
 };
 
 export default CheckoutPage;

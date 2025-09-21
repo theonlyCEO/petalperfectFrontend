@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "./HomePageComponent/Context/ShopContext";
+import { useIp } from "../context/IpContext"; // Import the useIp hook
 import "./Signup.css";
 
 const Signin = ({ isOpen, onClose, onGoToSignup, redirectTarget = "/" }) => {
@@ -8,6 +9,7 @@ const Signin = ({ isOpen, onClose, onGoToSignup, redirectTarget = "/" }) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { setUser } = useContext(ShopContext);
+  const { ip } = useIp(); // Access the IP from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,10 +19,10 @@ const Signin = ({ isOpen, onClose, onGoToSignup, redirectTarget = "/" }) => {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/checkpassword", {
+      const res = await fetch(`http://${ip}/checkpassword`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password }), // IP is now in the URL, not body
       });
 
       if (res.status === 200) {

@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
+import { useIp } from "../../context/IpContext"; // Import the useIp hook
 import Signup from '../Signup';
 import Signin from '../SignIn';
 import "./OrderPage.css";
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const OrderPage = () => {
   const { user } = useContext(ShopContext);
+  const { ip } = useIp(); // Access the IP from context
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,8 +18,8 @@ const OrderPage = () => {
       return;
     }
 
-    // Fetch real user orders from backend
-    fetch(`http://localhost:3000/orders?email=${user.email}`)
+    // Fetch real user orders from backend using IP context
+    fetch(`http://${ip}/orders?email=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setOrders(data);
@@ -27,7 +29,7 @@ const OrderPage = () => {
         console.error("Failed to fetch orders:", err);
         setLoading(false);
       });
-  }, [user]);
+  }, [user, ip]); // Added ip to dependency array
 
   if (!user) {
     return (

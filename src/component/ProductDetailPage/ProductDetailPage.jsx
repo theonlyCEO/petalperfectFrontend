@@ -1,49 +1,50 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
+import { useIp } from "../../context/IpContext"; // Import the useIp hook
 import { FaShoppingCart, FaHeart, FaStar, FaTimes } from "react-icons/fa";
 import './ProductDetailPage.css';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
+  const { ip } = useIp(); // Access the IP from context
   const { addToCart, addToWishlist } = useContext(ShopContext);
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-useEffect(() => {
-  const fetchProduct = async () => {
-    try {
-      setLoading(true);
-      // Fetch main product
-      const res = await fetch(`http://localhost:3000/products/${id}`);
-      if (!res.ok) throw new Error("Failed to fetch product");
-      const data = await res.json();
-      setProduct(data);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        // Fetch main product
+        const res = await fetch(`http://${ip}/products/${id}`);
+        if (!res.ok) throw new Error("Failed to fetch product");
+        const data = await res.json();
+        setProduct(data);
 
-      // Fetch related products
-      const relatedRes = await fetch(`http://localhost:3000/products?category=${data.category}`);
-      if (relatedRes.ok) {
-        let relatedData = await relatedRes.json();
-        // Filter out the current product
-        relatedData = relatedData.filter(item => item._id !== id);
-        
-        // Shuffle the array
-        relatedData.sort(() => Math.random() - 0.5);
+        // Fetch related products
+        const relatedRes = await fetch(`http://${ip}/products?category=${data.category}`);
+        if (relatedRes.ok) {
+          let relatedData = await relatedRes.json();
+          // Filter out the current product
+          relatedData = relatedData.filter(item => item._id !== id);
+          
+          // Shuffle the array
+          relatedData.sort(() => Math.random() - 0.5);
 
-        // Take 4 random products
-        setRelatedProducts(relatedData.slice(0, 4));
+          // Take 4 random products
+          setRelatedProducts(relatedData.slice(0, 4));
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchProduct();
-}, [id]);
-
+    };
+    fetchProduct();
+  }, [id, ip]); // Added ip to dependency array
 
   if (loading) return <div className="text-center">Loading product...</div>;
   if (!product) return <div className="text-center">Product not found.</div>;

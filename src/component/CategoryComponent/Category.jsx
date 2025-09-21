@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Category.css";
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
+import { useIp } from "../../context/IpContext"; // Import the useIp hook
 import { useNavigate } from "react-router-dom";
 import FlowerModal from "../FlowerModalComponent/FlowerModal";
 import FlowerLoader from "../FlowerLoaderComponent/FlowerLoader";
@@ -9,8 +10,9 @@ import { FaHeartBroken, FaHeart, FaStar, FaStarHalfAlt, FaRegStar, FaEye, FaFilt
 import { FiMenu, FiX, FiChevronRight } from "react-icons/fi";
 
 const ITEMS_PER_PAGE = 12;
-const url = import.meta.env.VITE_BACKEND_URL
+
 const CategoryPage = () => {
+  const { ip } = useIp(); // Access the IP from context
   const [modalProduct, setModalProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -50,16 +52,21 @@ const CategoryPage = () => {
     let timer;
     const fetchData = async () => {
       setLoading(true);
-      const res = await fetch(`${url}/products`);
-      const data = await res.json();
-      setProducts(data);
-      setFilteredProducts(data);
-      setCategories(["All", "Flowers", "Valentine's", "Birthday", "Green Plants", "Wedding", "Funeral"]);
-      timer = setTimeout(() => setLoading(false), 3000);
+      try {
+        const res = await fetch(`http://${ip}/products`);
+        const data = await res.json();
+        setProducts(data);
+        setFilteredProducts(data);
+        setCategories(["All", "Flowers", "Valentine's", "Birthday", "Green Plants", "Wedding", "Funeral"]);
+        timer = setTimeout(() => setLoading(false), 3000);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setLoading(false);
+      }
     };
     fetchData();
     return () => clearTimeout(timer);
-  }, []);
+  }, [ip]); // Added ip to dependency array
     
   useEffect(() => {
     let result = [...products];

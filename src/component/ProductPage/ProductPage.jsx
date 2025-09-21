@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 const FlowerPage = () => {
   const { id } = useParams();
@@ -7,7 +8,7 @@ const FlowerPage = () => {
 
   useEffect(() => {
     const fetchFlower = async () => {
-      const res = await fetch(`http://localhost:3000/products/${id}`);
+      const res = await fetch(`${API_BASE_URL}/products/${id}`);
       const data = await res.json();
       setProduct(data);
     };

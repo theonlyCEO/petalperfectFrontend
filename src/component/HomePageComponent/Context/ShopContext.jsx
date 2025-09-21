@@ -1,7 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
+import { useIp } from "../../../context/IpContext"; // Import the useIp hook
 export const ShopContext = createContext();
 
 export const ShopProvider = ({ children }) => {
+  const { ip } = useIp(); // Access the IP from context
+
   // Local state
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -18,7 +21,7 @@ export const ShopProvider = ({ children }) => {
     if (user?.email) {
       fetchUserData();
     }
-  }, [user?.email]);
+  }, [user?.email, ip]); // Added ip to dependency array
 
   // Fetch user data (cart, wishlist)
   const fetchUserData = async () => {
@@ -27,8 +30,8 @@ export const ShopProvider = ({ children }) => {
     try {
       setIsLoading(true);
       const [cartRes, wishlistRes] = await Promise.all([
-        fetch(`http://localhost:3000/carts?email=${user.email}`),
-        fetch(`http://localhost:3000/wishlist?email=${user.email}`)
+        fetch(`http://${ip}/carts?email=${user.email}`),
+        fetch(`http://${ip}/wishlist?email=${user.email}`)
       ]);
       
       const [cartData, wishlistData] = await Promise.all([
@@ -62,7 +65,7 @@ export const ShopProvider = ({ children }) => {
       const toSend = { ...product };
       delete toSend._id; // Prevent sending any _id
       
-      const res = await fetch("http://localhost:3000/carts", {
+      const res = await fetch(`http://${ip}/carts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...toSend, email: user.email, quantity: 1 })
@@ -70,7 +73,7 @@ export const ShopProvider = ({ children }) => {
       
       if (res.ok) {
         // Refetch cart data
-        const cartRes = await fetch(`http://localhost:3000/carts?email=${user.email}`);
+        const cartRes = await fetch(`http://${ip}/carts?email=${user.email}`);
         const cartData = await cartRes.json();
         setCart(cartData);
         return { success: true };
@@ -90,10 +93,10 @@ export const ShopProvider = ({ children }) => {
     if (!user?.email) return;
     
     try {
-      const res = await fetch(`http://localhost:3000/carts/${id}`, { method: "DELETE" });
+      const res = await fetch(`http://${ip}/carts/${id}`, { method: "DELETE" });
       
       if (res.ok) {
-        const cartRes = await fetch(`http://localhost:3000/carts?email=${user.email}`);
+        const cartRes = await fetch(`http://${ip}/carts?email=${user.email}`);
         const cartData = await cartRes.json();
         setCart(cartData);
       }
@@ -107,14 +110,14 @@ export const ShopProvider = ({ children }) => {
     if (!user?.email || qty < 1) return;
     
     try {
-      const res = await fetch(`http://localhost:3000/carts/${id}`, {
+      const res = await fetch(`http://${ip}/carts/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ quantity: qty })
       });
       
       if (res.ok) {
-        const cartRes = await fetch(`http://localhost:3000/carts?email=${user.email}`);
+        const cartRes = await fetch(`http://${ip}/carts?email=${user.email}`);
         const cartData = await cartRes.json();
         setCart(cartData);
       }
@@ -128,7 +131,7 @@ export const ShopProvider = ({ children }) => {
     if (!user?.email) return;
     
     try {
-      const res = await fetch(`http://localhost:3000/cart/clear`, {
+      const res = await fetch(`http://${ip}/cart/clear`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: user.email })
@@ -151,14 +154,14 @@ export const ShopProvider = ({ children }) => {
       const toSend = { ...product };
       delete toSend._id;
       
-      const res = await fetch("http://localhost:3000/wishlist", {
+      const res = await fetch(`http://${ip}/wishlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...toSend, email: user.email })
       });
       
       if (res.ok) {
-        const wishlistRes = await fetch(`http://localhost:3000/wishlist?email=${user.email}`);
+        const wishlistRes = await fetch(`http://${ip}/wishlist?email=${user.email}`);
         const wishlistData = await wishlistRes.json();
         setWishlist(wishlistData);
         alert("Added to wishlist!");
@@ -176,10 +179,10 @@ export const ShopProvider = ({ children }) => {
     if (!user?.email) return;
     
     try {
-      const res = await fetch(`http://localhost:3000/wishlist/${id}`, { method: "DELETE" });
+      const res = await fetch(`http://${ip}/wishlist/${id}`, { method: "DELETE" });
       
       if (res.ok) {
-        const wishlistRes = await fetch(`http://localhost:3000/wishlist?email=${user.email}`);
+        const wishlistRes = await fetch(`http://${ip}/wishlist?email=${user.email}`);
         const wishlistData = await wishlistRes.json();
         setWishlist(wishlistData);
       }
@@ -195,7 +198,7 @@ export const ShopProvider = ({ children }) => {
     try {
       // Delete all wishlist items for the user
       for (let item of wishlist) {
-        await fetch(`http://localhost:3000/wishlist/${item._id}`, { method: "DELETE" });
+        await fetch(`http://${ip}/wishlist/${item._id}`, { method: "DELETE" });
       }
       setWishlist([]);
       alert("Wishlist cleared!");
@@ -229,7 +232,7 @@ export const ShopProvider = ({ children }) => {
     const userId = user.userId || user._id;
     
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}`, {
+      const res = await fetch(`http://${ip}/users/${userId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profileData)
@@ -256,7 +259,7 @@ export const ShopProvider = ({ children }) => {
     const userId = user.userId || user._id;
     
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}`, {
+      const res = await fetch(`http://${ip}/users/${userId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ settings })
@@ -282,7 +285,7 @@ export const ShopProvider = ({ children }) => {
     const userId = user.userId || user._id;
     
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}/password`, {
+      const res = await fetch(`http://${ip}/users/${userId}/password`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -311,7 +314,7 @@ export const ShopProvider = ({ children }) => {
     const userId = user.userId || user._id;
     
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}/export`);
+      const res = await fetch(`http://${ip}/users/${userId}/export`);
       
       if (res.ok) {
         const data = await res.json();
@@ -326,32 +329,6 @@ export const ShopProvider = ({ children }) => {
     }
   };
 
-  // Delete user account
-  const deleteAccount = async () => {
-    if (!user?.userId && !user?._id) return { success: false, message: "User not logged in" };
-    
-    const userId = user.userId || user._id;
-    
-    try {
-      const res = await fetch(`http://localhost:3000/users/${userId}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: user.email })
-      });
-      
-      if (res.ok) {
-        signOut(); // Clear local state
-        return { success: true, message: "Account deleted successfully" };
-      } else {
-        const error = await res.json();
-        return { success: false, message: error.message };
-      }
-    } catch (error) {
-      console.error("Delete account error:", error);
-      return { success: false, message: "Failed to delete account" };
-    }
-  };
-
   // Get user statistics
   const getUserStats = async () => {
     if (!user?.userId && !user?._id) return { success: false, message: "User not logged in" };
@@ -359,7 +336,7 @@ export const ShopProvider = ({ children }) => {
     const userId = user.userId || user._id;
     
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}/stats`);
+      const res = await fetch(`http://${ip}/users/${userId}/stats`);
       
       if (res.ok) {
         const stats = await res.json();
@@ -374,10 +351,10 @@ export const ShopProvider = ({ children }) => {
     }
   };
 
-  // NEW: Track specific order by ID
+  // Track specific order by ID
   const trackOrder = async (orderId) => {
     try {
-      const res = await fetch(`http://localhost:3000/orders/${orderId}`);
+      const res = await fetch(`http://${ip}/orders/${orderId}`);
       
       if (res.ok) {
         const order = await res.json();
@@ -391,7 +368,27 @@ export const ShopProvider = ({ children }) => {
     }
   };
 
-  // NEW: Get order by partial ID (for user convenience)
+  // Get user orders
+  const getUserOrders = async () => {
+    if (!user?.email) return { success: false, message: "User not logged in" };
+    
+    try {
+      const res = await fetch(`http://${ip}/orders?email=${user.email}`);
+      
+      if (res.ok) {
+        const orders = await res.json();
+        return { success: true, data: orders };
+      } else {
+        const error = await res.json();
+        return { success: false, message: error.message };
+      }
+    } catch (error) {
+      console.error("Get orders error:", error);
+      return { success: false, message: "Failed to get orders" };
+    }
+  };
+
+  // Get order by partial ID (for user convenience)
   const findOrderByPartialId = async (partialId) => {
     if (!user?.email) return { success: false, message: "User not logged in" };
     
@@ -428,12 +425,38 @@ export const ShopProvider = ({ children }) => {
     localStorage.removeItem("wishlist");
   };
 
+  // Delete user account
+  const deleteAccount = async () => {
+    if (!user?.userId && !user?._id) return { success: false, message: "User not logged in" };
+    
+    const userId = user.userId || user._id;
+    
+    try {
+      const res = await fetch(`http://${ip}/users/${userId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: user.email })
+      });
+      
+      if (res.ok) {
+        signOut(); // Clear local state
+        return { success: true, message: "Account deleted successfully" };
+      } else {
+        const error = await res.json();
+        return { success: false, message: error.message };
+      }
+    } catch (error) {
+      console.error("Delete account error:", error);
+      return { success: false, message: "Failed to delete account" };
+    }
+  };
+
   // Place order
   const placeOrder = async (orderData) => {
     if (!user?.email) return { success: false, message: "User not logged in" };
     
     try {
-      const res = await fetch("http://localhost:3000/orders", {
+      const res = await fetch(`http://${ip}/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -457,26 +480,6 @@ export const ShopProvider = ({ children }) => {
     } catch (error) {
       console.error("Place order error:", error);
       return { success: false, message: "Failed to place order" };
-    }
-  };
-
-  // Get user orders
-  const getUserOrders = async () => {
-    if (!user?.email) return { success: false, message: "User not logged in" };
-    
-    try {
-      const res = await fetch(`http://localhost:3000/orders?email=${user.email}`);
-      
-      if (res.ok) {
-        const orders = await res.json();
-        return { success: true, data: orders };
-      } else {
-        const error = await res.json();
-        return { success: false, message: error.message };
-      }
-    } catch (error) {
-      console.error("Get orders error:", error);
-      return { success: false, message: "Failed to get orders" };
     }
   };
 
@@ -535,7 +538,7 @@ export const ShopProvider = ({ children }) => {
     getUserOrders,
     placeOrder,
 
-    // NEW: Order tracking
+    // Order tracking
     trackOrder,
     findOrderByPartialId,
 
@@ -605,7 +608,6 @@ export const useAuth = () => {
   };
 };
 
-// NEW: Order tracking hook
 export const useOrderTracking = () => {
   const context = useContext(ShopContext);
   if (!context) {

@@ -1,5 +1,5 @@
-// src/App.jsx
 import React from "react";
+import { IpProvider } from "../src/context/IpContext"; // Import IpProvider
 import { ShopProvider } from "./component/HomePageComponent/Context/ShopContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./component/Signup";
@@ -24,62 +24,62 @@ import ProductDetailPage from "./component/ProductDetailPage/ProductDetailPage";
 const App = () => {
   return (
     <>
-    <ShopProvider>
-      <Router>
-    <Navbar />
-        <Routes>
-          {/* PROTECTED CHECKOUT - must be signed in! */}
-          <Route
-            path="/checkout"
-            element={
-              <ProtectedRoute>
-                <CheckoutPage />
-              </ProtectedRoute>
-            }
-          />
-          {/* PROTECTED PROFILE - must be signed in! */}
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-          {/* PROTECTED ORDERS - must be signed in! */}
-          <Route
-            path="/order"
-            element={
-              <ProtectedRoute>
-                <OrderPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/track-order" element={<TrackOrderPage />} />
-          <Route path="/contactus" element={<ContactPage />} />
-          
-          <Route path="/product/:id" element={<ProductDetailPage />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/aboutUs" element={<AboutUs />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/wishlist" element={<WishlistPage />} />
-          <Route path="/Category" element={<CategoryPage />} />
-          <Route
-            path="/dummy"
-            element={
-              <ProtectedRoute>
-                <Dummy />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-        <Footer />
-      </Router>
-    </ShopProvider>
+      <IpProvider> {/* Wrap with IpProvider */}
+        <ShopProvider>
+          <Router>
+            <Navbar />
+            <Routes>
+              {/* PROTECTED CHECKOUT - must be signed in! */}
+              <Route
+                path="/checkout"
+                element={
+                  <ProtectedRoute>
+                    <CheckoutPage />
+                  </ProtectedRoute>
+                }
+              />
+              {/* PROTECTED PROFILE - must be signed in! */}
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <ProfilePage />
+                  </ProtectedRoute>
+                }
+              />
+              {/* PROTECTED ORDERS - must be signed in! */}
+              <Route
+                path="/order"
+                element={
+                  <ProtectedRoute>
+                    <OrderPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/track-order" element={<TrackOrderPage />} />
+              <Route path="/contactus" element={<ContactPage />} />
+              <Route path="/product/:id" element={<ProductDetailPage />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/aboutUs" element={<AboutUs />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/wishlist" element={<WishlistPage />} />
+              <Route path="/Category" element={<CategoryPage />} />
+              <Route
+                path="/dummy"
+                element={
+                  <ProtectedRoute>
+                    <Dummy />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+            <Footer />
+          </Router>
+        </ShopProvider>
+      </IpProvider>
     </>
-
   );
 };
 

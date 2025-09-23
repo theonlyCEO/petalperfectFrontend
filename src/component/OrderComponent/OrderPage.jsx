@@ -19,7 +19,7 @@ const OrderPage = () => {
     }
 
     // Fetch real user orders from backend using IP context
-    fetch(`http://${ip}/orders?email=${user.email}`)
+    fetch(`http://${ip}:3000/orders?email=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setOrders(data);

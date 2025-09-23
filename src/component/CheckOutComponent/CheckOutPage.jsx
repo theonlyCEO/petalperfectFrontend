@@ -88,7 +88,7 @@ const CheckoutPage = () => {
     }
     
     // Call backend to place order!
-    const res = await fetch(`http://${ip}/orders`, {
+    const res = await fetch(`http://${ip}:3000/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -103,7 +103,7 @@ const CheckoutPage = () => {
       }),
     });
     if (res.ok) {
-      await fetch(`http://${ip}/cart/clear`, {
+      await fetch(`http://${ip}:3000/cart/clear`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: user.email })

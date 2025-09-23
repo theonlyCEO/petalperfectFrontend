@@ -24,7 +24,7 @@ const Signup = ({ isOpen, onClose, onGoToSignin, redirectTarget = "/" }) => {
     }
 
     try {
-      const res = await fetch(`http://${ip}/signup`, {
+      const res = await fetch(`http://${ip}:3000/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userName, email, password, confirmPassword }), // IP is now in the URL, not body

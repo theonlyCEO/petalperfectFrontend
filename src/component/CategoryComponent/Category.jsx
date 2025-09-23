@@ -53,7 +53,7 @@ const CategoryPage = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://${ip}/products`);
+        const res = await fetch(`http://${ip}:3000/products`);
         const data = await res.json();
         setProducts(data);
         setFilteredProducts(data);

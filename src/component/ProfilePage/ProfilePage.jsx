@@ -81,7 +81,7 @@ const ProfilePage = () => {
         setLoading(true);
         
         // Fetch profile data
-        const profileRes = await fetch(`http://${ip}/users?email=${user.email}`);
+        const profileRes = await fetch(`http://${ip}:3000/users?email=${user.email}`);
         const profileData = await profileRes.json();
         
         setProfile(profileData);
@@ -102,9 +102,9 @@ const ProfilePage = () => {
 
         // Fetch orders, cart, wishlist in parallel
         const [ordersRes, cartRes, wishlistRes] = await Promise.all([
-          fetch(`http://${ip}/orders?email=${user.email}`),
-          fetch(`http://${ip}/carts?email=${user.email}`),
-          fetch(`http://${ip}/wishlist?email=${user.email}`)
+          fetch(`http://${ip}:3000/orders?email=${user.email}`),
+          fetch(`http://${ip}:3000/carts?email=${user.email}`),
+          fetch(`http://${ip}:3000/wishlist?email=${user.email}`)
         ]);
 
         const [ordersData, cartData, wishlistData] = await Promise.all([
@@ -160,7 +160,7 @@ const ProfilePage = () => {
         settings: settings
       };
 
-      const res = await fetch(`http://${ip}/users/${profile._id}`, {
+      const res = await fetch(`http://${ip}:3000/users/${profile._id}`, {
         method: 'PUT',
         headers: { "Content-Type":"application/json"},
         body: JSON.stringify(updateData)
@@ -194,7 +194,7 @@ const ProfilePage = () => {
     }
 
     try {
-      const res = await fetch(`http://${ip}/users/${profile._id}/password`, {
+      const res = await fetch(`http://${ip}:3000/users/${profile._id}/password`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -221,7 +221,7 @@ const ProfilePage = () => {
   // Download user data (GDPR compliance)
   const handleDownloadData = async () => {
     try {
-      const res = await fetch(`http://${ip}/users/${profile._id}/export`, {
+      const res = await fetch(`http://${ip}:3000/users/${profile._id}/export`, {
         method: 'GET',
         headers: { "Content-Type": "application/json" }
       });
@@ -263,7 +263,7 @@ const ProfilePage = () => {
       
       if (doubleConfirm === "DELETE MY ACCOUNT") {
         try {
-          const res = await fetch(`http://${ip}/users/${profile._id}`, {
+          const res = await fetch(`http://${ip}:3000/users/${profile._id}`, {
             method: 'DELETE',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: user.email })

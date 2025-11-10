@@ -17,9 +17,10 @@ const ConfettiIcon = () => (
     <circle cx="10" cy="38" r="2" fill="#B1CC33"/>
   </svg>
 );
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const CheckoutPage = () => {
-  const { ip } = useIp(); // Access the IP from context
+  // const { ip } = useIp(); // Access the IP from context
   const { cart, clearCart, user } = useContext(ShopContext);
   const navigate = useNavigate();
 
@@ -88,7 +89,7 @@ const CheckoutPage = () => {
     }
     
     // Call backend to place order!
-    const res = await fetch(`http://${ip}:3000/orders`, {
+    const res = await fetch(`http://${API_BASE_URL}:3000/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -103,7 +104,7 @@ const CheckoutPage = () => {
       }),
     });
     if (res.ok) {
-      await fetch(`http://${ip}:3000/cart/clear`, {
+      await fetch(`http://${API_BASE_URL}:3000/cart/clear`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: user.email })

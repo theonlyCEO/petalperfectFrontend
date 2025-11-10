@@ -4,6 +4,7 @@ import { ShopContext } from "../HomePageComponent/Context/ShopContext";
 import { useIp } from "../../context/IpContext"; // Import the useIp hook
 import { FaShoppingCart, FaHeart, FaStar, FaTimes } from "react-icons/fa";
 import './ProductDetailPage.css';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -19,13 +20,13 @@ const ProductDetailPage = () => {
       try {
         setLoading(true);
         // Fetch main product
-        const res = await fetch(`http://${ip}:3000/products/${id}`);
+        const res = await fetch(`http://${API_BASE_URL}:3000/products/${id}`);
         if (!res.ok) throw new Error("Failed to fetch product");
         const data = await res.json();
         setProduct(data);
 
         // Fetch related products
-        const relatedRes = await fetch(`http://${ip}:3000/products?category=${data.category}`);
+        const relatedRes = await fetch(`http://${API_BASE_URL}:3000/products?category=${data.category}`);
         if (relatedRes.ok) {
           let relatedData = await relatedRes.json();
           // Filter out the current product

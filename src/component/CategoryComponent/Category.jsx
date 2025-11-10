@@ -8,11 +8,11 @@ import FlowerLoader from "../FlowerLoaderComponent/FlowerLoader";
 import { GiFlowerEmblem, GiRose, GiHerbsBundle } from "react-icons/gi";
 import { FaHeartBroken, FaHeart, FaStar, FaStarHalfAlt, FaRegStar, FaEye, FaFilter } from "react-icons/fa";
 import { FiMenu, FiX, FiChevronRight } from "react-icons/fi";
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 const ITEMS_PER_PAGE = 12;
 
 const CategoryPage = () => {
-  const { ip } = useIp(); // Access the IP from context
+  // const { ip } = useIp(); // Access the IP from context
   const [modalProduct, setModalProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -53,7 +53,7 @@ const CategoryPage = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://${ip}:3000/products`);
+        const res = await fetch(`http://${ API_BASE_URL}:3000/products`);
         const data = await res.json();
         setProducts(data);
         setFilteredProducts(data);

@@ -5,6 +5,7 @@ import Signup from '../Signup';
 import Signin from '../SignIn';
 import "./OrderPage.css";
 import { Link } from 'react-router-dom';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const OrderPage = () => {
   const { user } = useContext(ShopContext);
@@ -19,7 +20,7 @@ const OrderPage = () => {
     }
 
     // Fetch real user orders from backend using IP context
-    fetch(`http://${ip}:3000/orders?email=${user.email}`)
+    fetch(`http://${API_BASE_URL}:3000/orders?email=${user.email}`)
       .then(res => res.json())
       .then(data => {
         setOrders(data);

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ShopContext } from "./HomePageComponent/Context/ShopContext";
 import { useIp } from "../context/IpContext"; // Import the useIp hook
 import "./Signup.css";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 
 const Signup = ({ isOpen, onClose, onGoToSignin, redirectTarget = "/" }) => {
   const [userName, setUserName] = useState("");
@@ -24,7 +26,7 @@ const Signup = ({ isOpen, onClose, onGoToSignin, redirectTarget = "/" }) => {
     }
 
     try {
-      const res = await fetch(`http://${ip}:3000/signup`, {
+      const res = await fetch(`http://${API_BASE_URL}:3000/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userName, email, password, confirmPassword }), // IP is now in the URL, not body

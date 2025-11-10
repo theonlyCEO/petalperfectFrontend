@@ -34,7 +34,7 @@ const HomePage = () => {
 
 
   useEffect(() => {
-    if (!ip) return; // wait until IP is set
+     // wait until IP is set
     const cachedProducts = localStorage.getItem("products");
     if (cachedProducts) {
       setProducts(JSON.parse(cachedProducts));
@@ -57,7 +57,7 @@ const HomePage = () => {
       }
     };
     fetchData();
-  }, [ip]); // 👈 re-run whenever IP changes
+  },[API_BASE_URL]); // 👈 re-run whenever IP changes
 
   const handleSubscribe = (e) => {
     e.preventDefault();

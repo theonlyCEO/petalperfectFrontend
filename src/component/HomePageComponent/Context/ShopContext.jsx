@@ -20,7 +20,7 @@ export const ShopProvider = ({ children }) => {
     if (user?.email) {
       fetchUserData();
     }
-  }, [user?.email, ip]); // Added ip to dependency array
+  }, [user?.email]); // Added ip to dependency array
 
   // Fetch user data (cart, wishlist)
   const fetchUserData = async () => {

@@ -66,7 +66,7 @@ const CategoryPage = () => {
     };
     fetchData();
     return () => clearTimeout(timer);
-  }, [ip]); // Added ip to dependency array
+  },[]); // Added ip to dependency array
     
   useEffect(() => {
     let result = [...products];

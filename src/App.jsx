@@ -1,5 +1,4 @@
 import React from "react";
-import { IpProvider } from "../src/context/IpContext"; // Import IpProvider
 import { ShopProvider } from "./component/HomePageComponent/Context/ShopContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./component/Signup";
@@ -24,7 +23,7 @@ import ProductDetailPage from "./component/ProductDetailPage/ProductDetailPage";
 const App = () => {
   return (
     <>
-      <IpProvider> {/* Wrap with IpProvider */}
+    
         <ShopProvider>
           <Router>
             <Navbar />
@@ -78,7 +77,7 @@ const App = () => {
             <Footer />
           </Router>
         </ShopProvider>
-      </IpProvider>
+     
     </>
   );
 };

@@ -92,7 +92,7 @@ const HomePage = () => {
                 <h3>{product.title}</h3>
                 <h5>{product.description}</h5>
                 <div className="product-rating">{renderStars(product.rating)}</div>
-                <p>R{Math.round(product.price + 222) + 0.99}</p>
+                <p>R{Math.round(product.price ) }</p>
                 <div className="btn-group">
                   <button onClick={(e) => { e.stopPropagation(); addToCart(product); }}>
                     <FaShoppingBasket style={{ marginRight: 4 }} /> Add to Cart

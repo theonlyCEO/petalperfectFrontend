@@ -65,7 +65,7 @@ export const ShopProvider = ({ children }) => {
       const toSend = { ...product };
       delete toSend._id; // Prevent sending any _id
       
-      const res = await fetch(`http://${ip};3000/carts`, {
+      const res = await fetch(`http://${ip}:3000/carts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...toSend, email: user.email, quantity: 1 })

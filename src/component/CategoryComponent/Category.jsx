@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Category.css";
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
-import { useIp } from "../../context/IpContext"; // Import the useIp hook
+
 import { useNavigate } from "react-router-dom";
 import FlowerModal from "../FlowerModalComponent/FlowerModal";
 import FlowerLoader from "../FlowerLoaderComponent/FlowerLoader";
@@ -12,7 +12,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 const ITEMS_PER_PAGE = 12;
 
 const CategoryPage = () => {
-  // const { ip } = useIp(); // Access the IP from context
+
   const [modalProduct, setModalProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);

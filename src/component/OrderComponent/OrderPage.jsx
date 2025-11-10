@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
-import { useIp } from "../../context/IpContext"; // Import the useIp hook
 import Signup from '../Signup';
 import Signin from '../SignIn';
 import "./OrderPage.css";
@@ -9,7 +8,6 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const OrderPage = () => {
   const { user } = useContext(ShopContext);
-  const { ip } = useIp(); // Access the IP from context
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 

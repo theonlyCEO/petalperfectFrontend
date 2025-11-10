@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
-import { useIp } from "../../context/IpContext"; // Import the useIp hook
 import { FaShoppingCart, FaHeart, FaStar, FaTimes } from "react-icons/fa";
 import './ProductDetailPage.css';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const ProductDetailPage = () => {
   const { id } = useParams();
-  const { ip } = useIp(); // Access the IP from context
   const { addToCart, addToWishlist } = useContext(ShopContext);
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);

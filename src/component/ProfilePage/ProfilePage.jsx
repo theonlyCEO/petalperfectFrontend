@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
-import { useIp } from "../../context/IpContext"; // Import the useIp hook
 import "./ProfilePage.css";
 import { FaEye, FaEyeSlash, FaCog, FaBell, FaTruck, FaHeart, FaShieldAlt, FaDownload, FaTrash } from "react-icons/fa";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -19,7 +18,6 @@ const avatarChoices = [
 
 const ProfilePage = () => {
   const { user, signOut, setUser } = useContext(ShopContext);
-  const { ip } = useIp(); // Access the IP from context
 
   // State for fetched info
   const [orders, setOrders] = useState([]);

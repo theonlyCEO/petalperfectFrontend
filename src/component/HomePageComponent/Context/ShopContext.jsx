@@ -1,10 +1,8 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { useIp } from "../../../context/IpContext"; // Import the useIp hook
 export const ShopContext = createContext();
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export const ShopProvider = ({ children }) => {
-  const { ip } = useIp(); // Access the IP from context
 
   // Local state
   const [cart, setCart] = useState([]);

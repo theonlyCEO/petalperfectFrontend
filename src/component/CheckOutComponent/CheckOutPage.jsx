@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./CheckOutPage.css";
 import { ShopContext } from "../HomePageComponent/Context/ShopContext";
-import { useIp } from "../../context/IpContext"; // Import the useIp hook
 import { useNavigate } from "react-router-dom";
 import Signin from "../SignIn";
 import Signup from "../Signup";
@@ -20,7 +19,6 @@ const ConfettiIcon = () => (
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const CheckoutPage = () => {
-  // const { ip } = useIp(); // Access the IP from context
   const { cart, clearCart, user } = useContext(ShopContext);
   const navigate = useNavigate();
 

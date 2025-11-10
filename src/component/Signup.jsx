@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "./HomePageComponent/Context/ShopContext";
-import { useIp } from "../context/IpContext"; // Import the useIp hook
 import "./Signup.css";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -13,7 +12,6 @@ const Signup = ({ isOpen, onClose, onGoToSignin, redirectTarget = "/" }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
   const { setUser } = useContext(ShopContext);
-  const { ip } = useIp(); // Access the IP from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();

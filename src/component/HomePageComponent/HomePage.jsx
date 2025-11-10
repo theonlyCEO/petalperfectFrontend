@@ -6,7 +6,6 @@ import FlowerModal from "../FlowerModalComponent/FlowerModal";
 import { FaLeaf, FaShippingFast, FaLock, FaTruck, FaHeart, FaStar, FaCheckCircle, FaShoppingBasket } from "react-icons/fa";
 import { GiFlowerEmblem } from "react-icons/gi";
 import { IoMdGift } from "react-icons/io";
-import { useIp } from "../../context/IpContext"; // 👈 import the IP hook
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const testimonials = [
@@ -33,7 +32,6 @@ const HomePage = () => {
   const productsRef = useRef();
   const { addToCart, addToWishlist } = useContext(ShopContext);
 
-  const { ip } = useIp(); // 👈 get the current IP from context
 
   useEffect(() => {
     if (!ip) return; // wait until IP is set

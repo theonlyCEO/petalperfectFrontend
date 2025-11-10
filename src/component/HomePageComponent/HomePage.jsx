@@ -7,6 +7,7 @@ import { FaLeaf, FaShippingFast, FaLock, FaTruck, FaHeart, FaStar, FaCheckCircle
 import { GiFlowerEmblem } from "react-icons/gi";
 import { IoMdGift } from "react-icons/io";
 import { useIp } from "../../context/IpContext"; // 👈 import the IP hook
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const testimonials = [
   { name: "Sophie M.", image: "https://randomuser.me/api/portraits/women/85.jpg", text: "Absolutely beautiful bouquet! Petal Perfect made my mom's birthday so special. Delivery was fast and flowers were super fresh." },
@@ -45,7 +46,7 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const prodRes = await fetch(`http://${ip}:3000/products`); // 👈 use dynamic IP
+        const prodRes = await fetch(`http://${API_BASE_URL}:3000/products`); // 👈 use dynamic IP
         if (!prodRes.ok) throw new Error("Failed to fetch products");
         const prodData = await prodRes.json();
         setProducts(prodData);

@@ -69,7 +69,34 @@ const HomePage = () => {
   return (
     <div className="homepage">
       {/* Hero, Banner, Why Choose Us, SVG dividers ... */}
-      {/* Hero */} <section className="hero"> <div className="hero-logo-wrap"> <GiFlowerEmblem className="brand-logo" /> <span className="brand-slogan">Petal Perfect</span> </div> <div className="hero-text"> <h1>Bouquets that<br /> make memories bloom</h1> <p>Delivering happiness, beauty & sustainable joy since </p> <button className="shop-btn" onClick={() => productsRef.current.scrollIntoView({ behavior: "smooth" })} > Discover Flowers </button> </div> <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Florist with bouquet" className="hero-img" /> </section> {/* Promo Banner */} <section className="banner-promo"> <span> <FaTruck style={{ verticalAlign: "middle", color: "#a10061", fontSize: "1.2em" }} /> &nbsp;Enjoy Free Delivery on Orders Over R300!&nbsp; <FaTruck style={{ verticalAlign: "middle", color: "#a10061", fontSize: "1.2em" }} /> </span> </section> {/* Why Choose Us */} <section className="why-choose-us"> <h2>Why Choose Petal Perfect?</h2> <div className="why-grid"> <div> <GiFlowerEmblem style={{ color: "#a10061", fontSize:"1.4em" }}/> Freshness Guaranteed </div> <div> <FaShippingFast style={{ color: "#a10061", fontSize:"1.4em" }}/> Same Day Delivery </div> <div> <FaLeaf style={{ color: "#a10061", fontSize:"1.4em" }}/> Locally Sourced </div> <div> <FaLock style={{ color: "#a10061", fontSize:"1.4em" }}/> Secure Checkout </div> </div> </section> {/* Section SVG Divider */} <svg className="petal-svg-divider" width="100%" height="60" viewBox="0 0 1440 60" preserveAspectRatio="none"> <path fill="#ffe2f7" fillOpacity="1" d="M0,32L40,42.7C80,53,160,75,240,69.3C320,64,400,32,480,21.3C560,11,640,21,720,32C800,43,880,53,960,58.7C1040,64,1120,64,1200,64C1280,64,1360,64,1400,64L1440,64L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path> </svg>
+      {/* Hero */} <section className="hero">
+         <div className="hero-logo-wrap">
+         <GiFlowerEmblem className="brand-logo" />
+          <span className="brand-slogan">Petal Perfect</span>
+           </div> <div className="hero-text"> 
+            <h1>Bouquets that<br /> make memories bloom</h1> 
+            <p>Delivering happiness, beauty & sustainable joy since </p> 
+            <button className="shop-btn" onClick={() => productsRef.current.scrollIntoView({ behavior: "smooth" })} > Discover Flowers </button>
+             </div>
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Florist with bouquet" className="hero-img" /> </section>
+               {/* Promo Banner */}
+                <section className="banner-promo">
+                   <span> <FaTruck style={{ verticalAlign: "middle", color: "#a10061", fontSize: "1.2em" }} /> &nbsp;Enjoy Free Delivery on Orders Over R300!&nbsp; <FaTruck style={{ verticalAlign: "middle", color: "#a10061", fontSize: "1.2em" }} /> </span>
+                    </section>
+                     {/* Why Choose Us */} 
+                     <section className="why-choose-us">
+                       <h2>Why Choose Petal Perfect?</h2> 
+                       <div className="why-grid"> 
+                        <div> 
+                          <GiFlowerEmblem style={{ color: "#a10061", fontSize:"1.4em" }}/> Freshness Guaranteed </div>
+                           <div> 
+                            <FaShippingFast style={{ color: "#a10061", fontSize:"1.4em" }}/> Same Day Delivery </div>
+                             <div> <FaLeaf style={{ color: "#a10061", fontSize:"1.4em" }}/> Locally Sourced </div>
+                              <div> <FaLock style={{ color: "#a10061", fontSize:"1.4em" }}/> Secure Checkout </div> 
+                              </div> 
+                              </section>
+                               {/* Section SVG Divider */}
+                                <svg className="petal-svg-divider" width="100%" height="60" viewBox="0 0 1440 60" preserveAspectRatio="none"> <path fill="#ffe2f7" fillOpacity="1" d="M0,32L40,42.7C80,53,160,75,240,69.3C320,64,400,32,480,21.3C560,11,640,21,720,32C800,43,880,53,960,58.7C1040,64,1120,64,1200,64C1280,64,1360,64,1400,64L1440,64L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path> </svg>
       
       <section className="products" ref={productsRef}>
         <h2>Featured Flowers</h2>
@@ -79,7 +106,7 @@ const HomePage = () => {
           <p className="error">{error}</p>
         ) : (
           <div className="product-grid">
-            {products.slice(0, 8).map((product) => (
+            {products.slice(3,13).map((product) => (
               <div key={product._id} className="product-card">
                 <div className="product-image-wrap" onClick={() => setModalProduct(product)} style={{ cursor: "pointer" }} title="View Details">
                   <img src={product.image} alt={product.title} />
@@ -91,10 +118,10 @@ const HomePage = () => {
                 <h3>{product.title}</h3>
                 <h5>{product.description}</h5>
                 <div className="product-rating">{renderStars(product.rating)}</div>
-                <p>R{Math.round(product.price ) }</p>
+                <p>R{(product.price ) }</p>
                 <div className="btn-group">
                   <button onClick={(e) => { e.stopPropagation(); addToCart(product); }}>
-                    <FaShoppingBasket style={{ marginRight: 4 }} /> Add to Cart
+                    <FaShoppingBasket style={{ marginRight: 4 }} /> Cart
                   </button>
                   <button className="wishlist-btn" onClick={(e) => { e.stopPropagation(); addToWishlist(product); }}>
                     <FaHeart style={{ marginRight: 3, color: "#e91e63" }} /> Wishlist

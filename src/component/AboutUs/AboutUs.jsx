@@ -16,7 +16,7 @@ const AboutUs = () => {
               Creating beauty, one bloom at a time.<br />
              we’ve poured our hearts into making moments memorable, petals perfect, and the planet greener.
             </p>
-            <a href="/shop" className="shop-now-btn-large">
+            <a href="/category" className="shop-now-btn-large">
               <FaShoppingBasket /> Shop Now
             </a>
           </div>
@@ -79,23 +79,7 @@ const AboutUs = () => {
             </div>
           </div>
         </section>
-        <section className="our-team">
-          <h2>Meet Our Team</h2>
-          <div className="team-grid">
-            <div className="team-member">
-              <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Florist Anna" />
-              <p><b>Anna</b><br />Lead Designer</p>
-            </div>
-            <div className="team-member">
-              <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Florist Ethan" />
-              <p><b>Ethan</b><br />Sourcing Expert</p>
-            </div>
-            <div className="team-member">
-              <img src="https://randomuser.me/api/portraits/women/76.jpg" alt="Florist Mia" />
-              <p><b>Mia</b><br />Delivery Chief</p>
-            </div>
-          </div>
-        </section>
+        
       </div>
     </>
   );

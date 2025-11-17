@@ -153,6 +153,16 @@ a {
 .icons .label {
   display: inline;
 }
+.carts{
+  background-color:palevioletred;
+  border-radius: 10px;
+  color:rgb(5, 5, 5);
+}
+#carts{
+  background-color:palevioletred;
+  border-radius: 10px;
+  color:rgb(5, 5, 5);
+}
 
 /* Dropdown Menus */
 .account-dropdown,

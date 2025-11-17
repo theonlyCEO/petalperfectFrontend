@@ -17,7 +17,7 @@ const CartPage = () => {
   // Subtotal
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = subtotal * 0.10; // 10% example tax
-  const shipping = subtotal > 300 ? 0 : 4.99;
+  const shipping = subtotal > 300 ? 0 :25;
   const total = subtotal + tax + shipping;
 
   // Handle checkout button click

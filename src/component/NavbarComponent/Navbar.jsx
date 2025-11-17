@@ -16,6 +16,8 @@ const Navbar = () => {
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [redirectTarget, setRedirectTarget] = useState(null);
+  // 🌟 NEW STATE FOR NAVBAR SEARCH 🌟
+  const [navbarSearchTerm, setNavbarSearchTerm] = useState("");
   const { cart, wishlist, removeFromCart, user, signOut } = useContext(ShopContext);
   const navigate = useNavigate();
 
@@ -27,6 +29,22 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
     setCartOpen(false);
     setAccountOpen(false);
+  };
+
+  // 🌟 NEW FUNCTION TO HANDLE SEARCH SUBMISSION 🌟
+  const handleSearch = (e) => {
+    e.preventDefault(); // Prevents default form submission/page reload
+    if (navbarSearchTerm.trim()) {
+      // Navigate to /Category and pass the search term as a query parameter
+      // This is the key to sharing the search functionality!
+      navigate(`/Category?search=${encodeURIComponent(navbarSearchTerm.trim())}`);
+    } else {
+      // Optional: Navigate to /Category page with no search term if input is empty
+      navigate("/Category");
+    }
+    // Clear the search bar after navigation
+    setNavbarSearchTerm(""); 
+    setMenuOpen(false); // Close mobile menu if open
   };
 
   // Handle profile link click
@@ -58,7 +76,8 @@ const Navbar = () => {
   // Handle checkout link click
   const handleCheckoutClick = (e) => {
     e.preventDefault();
-    if (user) {
+    
+    if (user ) {
       navigate("/checkout");
     } else {
       setRedirectTarget("/checkout");
@@ -99,14 +118,23 @@ const Navbar = () => {
           </span>
         </div>
 
-        <div className="search-bar">
-          <input type="text" placeholder="Search for products..." />
-          <button aria-label="Search">
+        {/* 🌟 WRAPPED SEARCH BAR IN A FORM WITH onSubmit HANDLER 🌟 */}
+        <form className="search-bar" onSubmit={handleSearch}>
+          <input 
+            type="text" 
+            placeholder="Search for products..."
+            // 🌟 ADDED VALUE AND onChange HANDLERS 🌟
+            value={navbarSearchTerm}
+            onChange={(e) => setNavbarSearchTerm(e.target.value)}
+          />
+          {/* Change button type to submit */}
+          <button type="submit" aria-label="Search">
             <FiSearch />
           </button>
-        </div>
+        </form>
 
         <div className="icons">
+          {/* ... (rest of the account, wishlist, and cart icons remain the same) ... */}
           <div
             className={`account ${accountOpen ? 'open' : ''}`}
             onClick={() => {
@@ -131,8 +159,7 @@ const Navbar = () => {
                   <a href="#" onClick={() => { navigate("/wishlist"); setMenuOpen(false); }}>
                     My Wishlist ({wishlist.length})
                   </a>
-                  <a href="#">Returns & Refunds</a>
-                  <a href="#">Settings</a>
+                  
                   <button
                     className="sign-in"
                     onClick={() => {
@@ -151,7 +178,7 @@ const Navbar = () => {
                   <a href="#" onClick={() => { navigate("/wishlist"); setMenuOpen(false); }}>
                     My Wishlist ({wishlist.length})
                   </a>
-                
+                  
                   <button
                     className="sign-in"
                     onClick={() => {
@@ -193,7 +220,7 @@ const Navbar = () => {
             }}
           >
             <FiShoppingCart style={{ verticalAlign: "middle" }} /> 
-            <span className="label">Cart ({cartCount})</span>
+            <span className="label" >Cart <span id ="carts">({cartCount})</span></span>
             <div className="cart-dropdown">
               <h4>Your Cart</h4>
               {cart.length === 0 ? (
@@ -238,8 +265,7 @@ const Navbar = () => {
         <a href="#" onClick={() => { navigate("/"); setMenuOpen(false); }}>Home</a>
         <a href="#" onClick={() => { navigate("/AboutUs"); setMenuOpen(false); }}>About</a>
         <Link to="/Category" onClick={() => setMenuOpen(false)}><a href="#">Category</a></Link>
-        <a href="#" onClick={() => { navigate("/cart"); setMenuOpen(false); }}>Cart</a>
-        <a href="#" onClick={handleCheckoutClick}>Checkout</a>
+        <a href="#" onClick={() => { navigate("/cart"); setMenuOpen(false); }}>Cart<span className="carts">({cart.length})</span></a>
         <a href="#" onClick={() => { navigate("/contactus"); setMenuOpen(false); }}>Contact</a>
       </nav>
 

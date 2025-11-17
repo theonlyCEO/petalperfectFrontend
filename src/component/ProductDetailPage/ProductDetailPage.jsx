@@ -43,7 +43,7 @@ const ProductDetailPage = () => {
       }
     };
     fetchProduct();
-  }, [id, ip]); // Added ip to dependency array
+  }, [id,API_BASE_URL]); // Added ip to dependency array
 
   if (loading) return <div className="text-center">Loading product...</div>;
   if (!product) return <div className="text-center">Product not found.</div>;

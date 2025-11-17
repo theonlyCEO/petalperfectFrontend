@@ -78,7 +78,7 @@ const CheckoutPage = () => {
     }));
   };
 
-  // ==== NEW ORDER SUBMIT ====
+  // ==== NEW ORDER SUBMIT (UPDATED) ====
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
@@ -109,9 +109,10 @@ const CheckoutPage = () => {
       });
       clearCart();
       setOrderSuccess(true);
+      // **CHANGE: Navigate to /orders page after success**
       setTimeout(() => {
         setOrderSuccess(false);
-        navigate("/");
+        navigate("/order"); // <--- CHANGED FROM navigate("/")
       }, 2000);
     } else {
       alert('Order failed. Please try again.');
@@ -122,6 +123,43 @@ const CheckoutPage = () => {
   const handleGoToSignup = () => setAuthModal({ open: true, type: "signup" });
   const handleGoToSignin = () => setAuthModal({ open: true, type: "signin" });
   const handleCloseModal = () => setAuthModal({ open: false, type: "signin" });
+
+  // Conditional Payment Fields
+  const renderPaymentFields = () => {
+    switch (form.paymentMethod) {
+      case "card":
+        return (
+          <div className="card-fields">
+            <div className="form-group">
+              <label htmlFor="card">Card Number</label>
+              <input required name="card" placeholder="1234 5678 9012 3456" value={form.card} onChange={handleInput} maxLength="16" />
+            </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="expiry">Expiry (MM/YY)</label>
+                <input required name="expiry" placeholder="MM/YY" value={form.expiry} onChange={handleInput} pattern="\d{2}/\d{2}" maxLength="5" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="cvc">CVC</label>
+                <input required name="cvc" placeholder="CVC" value={form.cvc} onChange={handleInput} maxLength="3" />
+              </div>
+            </div>
+          </div>
+        );
+      case "upi":
+        return (
+          <div className="form-group">
+            <label htmlFor="upi">UPI ID</label>
+            <input required name="upi" placeholder="yourappsname@bank" value={form.upi} onChange={handleInput} />
+          </div>
+        );
+      case "cash":
+      default:
+        return (
+          <p className="cash-on-delivery-note">You will pay **R{total.toFixed(2)}** in cash upon delivery.</p>
+        );
+    }
+  };
 
   if (!user && authModal.open) {
     return (
@@ -227,7 +265,11 @@ const CheckoutPage = () => {
                 Cash on Delivery
               </label>
             </div>
-            {/* Card, UPI, Cash details can show here as in your previously working UI */}
+            {/* **ADDED: Conditional payment fields** */}
+            <div className="payment-details-container">
+              {renderPaymentFields()}
+            </div>
+
             <button className="place-order-btn" type="submit">Place Order</button>
           </form>
         </div>

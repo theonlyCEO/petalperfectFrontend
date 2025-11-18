@@ -37,7 +37,7 @@ export const ShopProvider = ({ children }) => {
                     return; 
                 }
 
-                const res = await fetch(`http://${API_BASE_URL}:3000/products`);
+                const res = await fetch(`${API_BASE_URL}/products`);
                 const data = await res.json();
                 setAllProducts(data);
             } catch (error) {
@@ -59,8 +59,8 @@ export const ShopProvider = ({ children }) => {
         try {
             setIsLoading(true);
             const [cartRes, wishlistRes] = await Promise.all([
-                fetch(`http://${API_BASE_URL}:3000/carts?email=${user.email}`),
-                fetch(`http://${API_BASE_URL}:3000/wishlist?email=${user.email}`)
+                fetch(`${API_BASE_URL}/carts?email=${user.email}`),
+                fetch(`${API_BASE_URL}/wishlist?email=${user.email}`)
             ]);
 
             const [cartData, wishlistData] = await Promise.all([
@@ -101,14 +101,14 @@ export const ShopProvider = ({ children }) => {
                 return updateQuantity(existingCartItem._id, existingCartItem.quantity + 1);
             }
 
-            const res = await fetch(`http://${API_BASE_URL}:3000/carts`, {
+            const res = await fetch(`${API_BASE_URL}/carts`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...toSend, email: user.email, quantity: 1, productId: product._id }) // Added productId for better tracking
             });
 
             if (res.ok) {
-                const cartRes = await fetch(`http://${API_BASE_URL}:3000/carts?email=${user.email}`);
+                const cartRes = await fetch(`${API_BASE_URL}/carts?email=${user.email}`);
                 const cartData = await cartRes.json();
                 setCart(cartData);
                 return { success: true };
@@ -128,10 +128,10 @@ export const ShopProvider = ({ children }) => {
         if (!user?.email) return;
 
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/carts/${id}`, { method: "DELETE" });
+            const res = await fetch(`${API_BASE_URL}/carts/${id}`, { method: "DELETE" });
 
             if (res.ok) {
-                const cartRes = await fetch(`http://${API_BASE_URL}:3000/carts?email=${user.email}`);
+                const cartRes = await fetch(`${API_BASE_URL}/carts?email=${user.email}`);
                 const cartData = await cartRes.json();
                 setCart(cartData);
             }
@@ -145,14 +145,14 @@ export const ShopProvider = ({ children }) => {
         if (!user?.email || qty < 1) return;
 
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/carts/${id}`, {
+            const res = await fetch(`${API_BASE_URL}/carts/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ quantity: qty })
             });
 
             if (res.ok) {
-                const cartRes = await fetch(`http://${API_BASE_URL}:3000/carts?email=${user.email}`);
+                const cartRes = await fetch(`${API_BASE_URL}/carts?email=${user.email}`);
                 const cartData = await cartRes.json();
                 setCart(cartData);
             }
@@ -166,7 +166,7 @@ export const ShopProvider = ({ children }) => {
         if (!user?.email) return;
 
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/cart/clear`, {
+            const res = await fetch(`${API_BASE_URL}/cart/clear`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: user.email })
@@ -195,14 +195,14 @@ export const ShopProvider = ({ children }) => {
             const toSend = { ...product };
             delete toSend._id;
 
-            const res = await fetch(`http://${API_BASE_URL}:3000/wishlist`, {
+            const res = await fetch(`${API_BASE_URL}/wishlist`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...toSend, email: user.email, productId: product._id }) // Added productId
             });
 
             if (res.ok) {
-                const wishlistRes = await fetch(`http://${API_BASE_URL}:3000/wishlist?email=${user.email}`);
+                const wishlistRes = await fetch(`${API_BASE_URL}/wishlist?email=${user.email}`);
                 const wishlistData = await wishlistRes.json();
                 setWishlist(wishlistData);
                 alert("Added to wishlist!");
@@ -220,10 +220,10 @@ export const ShopProvider = ({ children }) => {
         if (!user?.email) return;
 
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/wishlist/${id}`, { method: "DELETE" });
+            const res = await fetch(`${API_BASE_URL}/wishlist/${id}`, { method: "DELETE" });
 
             if (res.ok) {
-                const wishlistRes = await fetch(`http://${API_BASE_URL}:3000/wishlist?email=${user.email}`);
+                const wishlistRes = await fetch(`${API_BASE_URL}/wishlist?email=${user.email}`);
                 const wishlistData = await wishlistRes.json();
                 setWishlist(wishlistData);
             }
@@ -238,7 +238,7 @@ export const ShopProvider = ({ children }) => {
 
         try {
             for (let item of wishlist) {
-                await fetch(`http://${API_BASE_URL}:3000/wishlist/${item._id}`, { method: "DELETE" });
+                await fetch(`${API_BASE_URL}/wishlist/${item._id}`, { method: "DELETE" });
             }
             setWishlist([]);
             alert("Wishlist cleared!");
@@ -274,7 +274,7 @@ export const ShopProvider = ({ children }) => {
         const userId = user.userId || user._id;
         
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/users/${userId}`, {
+            const res = await fetch(`${API_BASE_URL}/users/${userId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(profileData)
@@ -301,7 +301,7 @@ export const ShopProvider = ({ children }) => {
         const userId = user.userId || user._id;
         
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/users/${userId}`, {
+            const res = await fetch(`${API_BASE_URL}/users/${userId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ settings })
@@ -327,7 +327,7 @@ export const ShopProvider = ({ children }) => {
         const userId = user.userId || user._id;
         
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/users/${userId}/password`, {
+            const res = await fetch(`${API_BASE_URL}/users/${userId}/password`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -356,7 +356,7 @@ export const ShopProvider = ({ children }) => {
         const userId = user.userId || user._id;
         
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/users/${userId}/export`);
+            const res = await fetch(`${API_BASE_URL}/users/${userId}/export`);
             
             if (res.ok) {
                 const data = await res.json();
@@ -378,7 +378,7 @@ export const ShopProvider = ({ children }) => {
         const userId = user.userId || user._id;
         
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/users/${userId}/stats`);
+            const res = await fetch(`${API_BASE_URL}/users/${userId}/stats`);
             
             if (res.ok) {
                 const stats = await res.json();
@@ -396,7 +396,7 @@ export const ShopProvider = ({ children }) => {
     // Track specific order by ID
     const trackOrder = async (orderId) => {
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/orders/${orderId}`);
+            const res = await fetch(`${API_BASE_URL}/orders/${orderId}`);
             
             if (res.ok) {
                 const order = await res.json();
@@ -415,7 +415,7 @@ export const ShopProvider = ({ children }) => {
         if (!user?.email) return { success: false, message: "User not logged in" };
         
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/orders?email=${user.email}`);
+            const res = await fetch(`${API_BASE_URL}/orders?email=${user.email}`);
             
             if (res.ok) {
                 const orders = await res.json();
@@ -474,7 +474,7 @@ export const ShopProvider = ({ children }) => {
         const userId = user.userId || user._id;
         
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/users/${userId}`, {
+            const res = await fetch(`${API_BASE_URL}/users/${userId}`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: user.email })
@@ -498,7 +498,7 @@ export const ShopProvider = ({ children }) => {
         if (!user?.email) return { success: false, message: "User not logged in" };
         
         try {
-            const res = await fetch(`http://${API_BASE_URL}:3000/orders`, {
+            const res = await fetch(`${API_BASE_URL}/orders`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

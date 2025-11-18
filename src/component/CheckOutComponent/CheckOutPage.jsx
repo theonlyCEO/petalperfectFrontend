@@ -87,7 +87,7 @@ const CheckoutPage = () => {
     }
     
     // Call backend to place order!
-    const res = await fetch(`http://${API_BASE_URL}:3000/orders`, {
+    const res = await fetch(`${API_BASE_URL}/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -102,7 +102,7 @@ const CheckoutPage = () => {
       }),
     });
     if (res.ok) {
-      await fetch(`http://${API_BASE_URL}:3000/cart/clear`, {
+      await fetch(`${API_BASE_URL}/cart/clear`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: user.email })

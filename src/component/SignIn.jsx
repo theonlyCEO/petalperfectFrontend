@@ -19,7 +19,7 @@ const Signin = ({ isOpen, onClose, onGoToSignup, redirectTarget = "/" }) => {
     }
 
     try {
-      const res = await fetch(`http://${API_BASE_URL}:3000/checkpassword`, {
+      const res = await fetch(`${API_BASE_URL}/checkpassword`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }), // IP is now in the URL, not body

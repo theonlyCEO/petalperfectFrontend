@@ -44,7 +44,7 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const prodRes = await fetch(`http://${API_BASE_URL}:3000/products`); // 👈 use dynamic IP
+        const prodRes = await fetch(`${API_BASE_URL}/products`); // 👈 use dynamic IP
         if (!prodRes.ok) throw new Error("Failed to fetch products");
         const prodData = await prodRes.json();
         setProducts(prodData);

@@ -18,13 +18,13 @@ const ProductDetailPage = () => {
       try {
         setLoading(true);
         // Fetch main product
-        const res = await fetch(`http://${API_BASE_URL}:3000/products/${id}`);
+        const res = await fetch(`${API_BASE_URL}/products/${id}`);
         if (!res.ok) throw new Error("Failed to fetch product");
         const data = await res.json();
         setProduct(data);
 
         // Fetch related products
-        const relatedRes = await fetch(`http://${API_BASE_URL}:3000/products?category=${data.category}`);
+        const relatedRes = await fetch(`${API_BASE_URL}/products?category=${data.category}`);
         if (relatedRes.ok) {
           let relatedData = await relatedRes.json();
           // Filter out the current product

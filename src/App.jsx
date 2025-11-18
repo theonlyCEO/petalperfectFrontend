@@ -19,6 +19,7 @@ import OrderPage from "./component/OrderComponent/OrderPage";
 import TrackOrderPage from "./component/TrackOrderPageComponent/TrackOrderPage";
 import Footer from "./component/FooterComponent/footer";
 import ProductDetailPage from "./component/ProductDetailPage/ProductDetailPage";
+import ScrollToTop from './ScrollToTop'; // Your new component
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <ShopProvider>
           <Router>
             <Navbar />
+            <ScrollToTop />
             <Routes>
               {/* PROTECTED CHECKOUT - must be signed in! */}
               <Route
